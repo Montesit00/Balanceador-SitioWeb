@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  node-container-1:
+    image: node:14
+    volumes:
+      C:\Users\Diego\Desktop\tp_evaluativo\sitio1:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "node index.js"
+    networks:
+      ultimonode
+
+  node-container-2:
+    image: node:14
+    volumes:
+      C:\Users\Diego\Desktop\tp_evaluativo\sitio2:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "node index.js"
+    networks:
+      ultimonode
+
+  haproxy-balancer:
+    image: haproxy:latest
+    volumes:
+      C:\Users\Diego\Desktop\tp_evaluativo\balanceador/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      "8088:80"
+    networks:
+      ultimonode
+
+networks:
+  ultimonode:
